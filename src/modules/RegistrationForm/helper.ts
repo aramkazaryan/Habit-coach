@@ -27,4 +27,10 @@ export const RegistrationInputs = [
     placeholder: 'Адрес электронной почты',
     required: true,
   },
+  {
+    name: 'password',
+    type: 'password',
+    placeholder: 'Пароль',
+    required: true,
+  },
 ]

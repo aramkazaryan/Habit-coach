@@ -12,66 +12,25 @@ class HabitStore {
   constructor() {
     makeAutoObservable(this)
   }
+  isLogin = false
   habits: HabitI[] = [
     {
       id: 1,
-      title: 'habit sadasdadnfb ndsfm, m,sd fm, sdmfnsdl fnl,msd 1',
+      title: 'Читать 30 минут',
       startDate: '2024-05-20',
       endDate: '2024-05-24',
       doneDays: [],
     },
     {
       id: 2,
-      title: 'habit 2',
+      title: 'Решать задачки',
       startDate: '2024-05-20',
       endDate: '2024-05-24',
       doneDays: [],
     },
     {
       id: 3,
-      title: 'habit 3',
-      startDate: '2024-05-20',
-      endDate: '2024-05-24',
-      doneDays: [],
-    },
-    {
-      id: 4,
-      title: 'habit 4',
-      startDate: '2024-05-20',
-      endDate: '2024-05-24',
-      doneDays: [],
-    },
-    {
-      id: 5,
-      title: 'habit 5',
-      startDate: '2024-05-20',
-      endDate: '2024-05-24',
-      doneDays: [],
-    },
-    {
-      id: 6,
-      title: 'habit 6',
-      startDate: '2024-05-20',
-      endDate: '2024-05-24',
-      doneDays: [],
-    },
-    {
-      id: 7,
-      title: 'habit 7',
-      startDate: '2024-05-20',
-      endDate: '2024-05-24',
-      doneDays: [],
-    },
-    {
-      id: 8,
-      title: 'habit 8',
-      startDate: '2024-05-20',
-      endDate: '2024-05-24',
-      doneDays: [],
-    },
-    {
-      id: 9,
-      title: 'habit 9',
+      title: 'Прогулка по парку',
       startDate: '2024-05-20',
       endDate: '2024-05-24',
       doneDays: [],
@@ -95,6 +54,34 @@ class HabitStore {
       this.habits = this.habits.map(i =>
         i.id === id ? { ...i, doneDays: i.doneDays.filter(i => i !== day) } : i,
       )
+    }
+  }
+
+  register = user => {
+    fetch('http://localhost:3000/register', {
+      method: 'PUT',
+      body: JSON.stringify({
+        email: user.email,
+        name: user.firstName,
+        surname: user.lastName,
+        password: user.password,
+      }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+      })
+  }
+
+  login = (values: { email: string; password: string }) => {
+    if (
+      values.email === 'aramkazaryan11@gmail.com' &&
+      values.password === 'aram2003@'
+    ) {
+      this.isLogin = true
+      window.open('/habits', '_self')
+    } else {
+      alert('Неверный логин или пароль')
     }
   }
 }

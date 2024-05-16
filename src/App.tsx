@@ -4,23 +4,25 @@ import SignInPage from './pages/SignInPage'
 import CalendarPage from './pages/CalendarPage'
 import Navbar from './components/Navbar'
 import HabitsPage from './pages/HabitsPage'
+import { observer } from 'mobx-react-lite'
+import habitStore from './store/habit-store'
 
-export default function App() {
+const App = observer(() => {
+  const { isLogin } = habitStore
   return (
     <div>
-      <Navbar />
       <Routes>
         <Route path='/' element={<SignInPage />} />
-        <Route path='/login' element={<SignInPage />} />
         <Route path='/registration' element={<RegistrationPage />} />
         <Route path='/*' element={<Dashboard />} />
       </Routes>
     </div>
   )
-}
+})
 const Dashboard = () => {
   return (
     <div>
+      <Navbar />
       <Routes>
         <Route path='calendar' element={<CalendarPage />} />
         <Route path='habits' element={<HabitsPage />} />
@@ -28,3 +30,5 @@ const Dashboard = () => {
     </div>
   )
 }
+
+export default App

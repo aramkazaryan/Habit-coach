@@ -2,16 +2,24 @@ import { Form, Formik } from 'formik'
 import CustomButton from '../../UI/CustomButton'
 import CustomInput from '../../UI/CustomInput'
 import { RegistrationInputs, loginValidationSchemas } from './helper.ts'
+import habitStore from '../../store/habit-store.tsx'
+import { values } from 'mobx'
+import { observer } from 'mobx-react-lite'
 
-export const RegistrationForm = () => {
+export const RegistrationForm = observer(() => {
+  const { register } = habitStore
   return (
     <Formik
       initialValues={{
+        firstName: '',
+        lastName: '',
         email: '',
         password: '',
       }}
       validationSchema={loginValidationSchemas}
-      onSubmit={() => {}}
+      onSubmit={values => {
+        register(values)
+      }}
     >
       {({ errors, touched }) => (
         <Form className='form'>
@@ -39,4 +47,4 @@ export const RegistrationForm = () => {
       )}
     </Formik>
   )
-}
+})

@@ -79,7 +79,7 @@ export const AddHabit: React.FC<Props> = observer(({ setOpen }) => {
                   />
                 </div>
               </div>
-              <div className='flex flex-wrap items-center justify-end  shrink-0 text-blue-gray-500'>
+              <div className='flex flex-wrap items-center justify-end  shrink-0 text-blue-gray-500 mt-6'>
                 <button
                   data-ripple-dark='true'
                   data-dialog-close='true'

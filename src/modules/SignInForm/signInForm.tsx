@@ -2,8 +2,11 @@ import { Form, Formik } from 'formik'
 import CustomButton from '../../UI/CustomButton/index.ts'
 import CustomInput from '../../UI/CustomInput/index.ts'
 import { SignInInputs, signInValidationSchemas } from './helper.ts'
+import { observer } from 'mobx-react-lite'
+import habitStore from '../../store/habit-store.tsx'
 
-export const SignInForm = () => {
+export const SignInForm = observer(() => {
+  const { login } = habitStore
   return (
     <Formik
       initialValues={{
@@ -11,7 +14,9 @@ export const SignInForm = () => {
         password: '',
       }}
       validationSchema={signInValidationSchemas}
-      onSubmit={() => {}}
+      onSubmit={values => {
+        login(values)
+      }}
     >
       {({ errors, touched }) => (
         <Form className='form' method='POST'>
@@ -40,4 +45,4 @@ export const SignInForm = () => {
       )}
     </Formik>
   )
-}
+})
